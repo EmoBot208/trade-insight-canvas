@@ -1,73 +1,118 @@
-# Welcome to your Lovable project
 
-## Project info
+# Trader Dash
 
-**URL**: https://lovable.dev/projects/379fddcc-20e9-401f-81c3-76a8e08b024b
+A React-based trading analysis dashboard that consumes a Django REST API to visualize trading data.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **CSV Uploads**: Upload trade data files with validation
+- **Dashboard Visualization**: Interactive charts for trade analysis
+- **Customizable Layouts**: Drag and drop widgets to create personalized views
+- **Upload History**: Browse and manage past uploads
+- **API Integration**: Consumes a Django REST API for data processing
 
-**Use Lovable**
+## Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/379fddcc-20e9-401f-81c3-76a8e08b024b) and start prompting.
+- **React 18** + **Vite** + **TypeScript**
+- **Tailwind CSS** + **shadcn/ui** for styling
+- **react-hook-form** (+ zod) for form handling and validation
+- **React Query** for API data fetching
+- **Recharts**, **react-chartjs-2**, and **Victory** for data visualization
+- **react-grid-layout** for the dashboard grid system
+- **Context API** + custom hooks for state management
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js 14+
+- npm or yarn
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Environment Variables
 
-Follow these steps:
+Create a `.env` file in the root directory with the following variables:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```env
+# API Configuration
+VITE_API_BASE_URL=http://localhost:8000/api
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Authentication (if needed)
+VITE_AUTH_ENABLED=false
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Installation
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at http://localhost:8080
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## API Endpoints
 
-**Use GitHub Codespaces**
+The application consumes the following API endpoints:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **Uploads**
+  - `GET /api/uploads/`: List all uploads
+  - `GET /api/uploads/{id}/`: Get upload details
+  - `POST /api/uploads/`: Upload a new file
+  - `DELETE /api/uploads/{id}/`: Delete an upload
 
-## What technologies are used for this project?
+- **Metrics**
+  - `GET /api/metrics/?uploadId={uploadId}`: Get metrics for a specific upload
+  - `GET /api/metrics/symbols/?uploadId={uploadId}`: Get available symbols for an upload
 
-This project is built with:
+- **Preferences**
+  - `GET /api/preferences/`: Get user preferences
+  - `POST /api/preferences/`: Create user preferences
+  - `PUT /api/preferences/{id}/`: Update user preferences
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## CSV Format
 
-## How can I deploy this project?
+The application expects CSV files in the following format:
 
-Simply open [Lovable](https://lovable.dev/projects/379fddcc-20e9-401f-81c3-76a8e08b024b) and click on Share -> Publish.
+```csv
+timestamp,symbol,side,price,quantity
+2023-05-15T14:30:00Z,AAPL,buy,150.25,100
+2023-05-15T14:35:22Z,MSFT,sell,290.75,50
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Development
 
-Yes, you can!
+### Available Scripts
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```bash
+# Start development server
+npm run dev
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+# Build for production
+npm run build
+
+# Run unit tests
+npm run test
+
+# Lint
+npm run lint
+```
+
+## Project Structure
+
+```
+src/
+├── components/        # UI components
+│   ├── charts/        # Chart components
+│   ├── dashboard/     # Dashboard components
+│   ├── history/       # History components
+│   ├── layout/        # Layout components
+│   ├── ui/            # UI components (shadcn)
+│   └── upload/        # Upload components
+├── contexts/          # Context providers
+├── hooks/             # Custom hooks
+├── lib/               # Utility functions
+├── pages/             # Page components
+└── types/             # TypeScript type definitions
+```
