@@ -4,8 +4,11 @@ import { Responsive, WidthProvider, Layout } from "react-grid-layout";
 import { Widget } from "@/types";
 import { useUserPrefs } from "@/contexts/UserPrefsContext";
 
+// Import the CSS files with correct paths
 import "react-grid-layout/css/styles.css";
-import "react-resizable/css/styles.css";
+// We need to handle the react-resizable CSS differently since it's causing an issue
+// Using a relative path that's compatible with how the package is distributed
+import "../../../node_modules/react-resizable/css/styles.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
