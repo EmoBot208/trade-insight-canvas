@@ -13,7 +13,7 @@ export function useUploadStatus(uploadId: string | undefined) {
     enabled: !!uploadId,
     refetchInterval: (data) => {
       // Poll every 3 seconds until upload is complete
-      if (data && (data.status === "completed" || data.status === "failed")) {
+      if (data && data.status === "completed" || data?.status === "failed") {
         setIsComplete(true);
         return false; // Stop polling
       }

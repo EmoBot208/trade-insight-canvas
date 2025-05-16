@@ -139,7 +139,7 @@ export default function UploadTable() {
             <PaginationItem>
               <PaginationPrevious 
                 onClick={() => setPage(p => Math.max(1, p - 1))}
-                disabled={page === 1}
+                className={page === 1 ? "pointer-events-none opacity-50" : ""}
               />
             </PaginationItem>
             
@@ -161,7 +161,7 @@ export default function UploadTable() {
             <PaginationItem>
               <PaginationNext 
                 onClick={() => setPage(p => p + 1)}
-                disabled={!data || page >= Math.ceil(data.total / pageSize)}
+                className={!data || page >= Math.ceil(data.total / pageSize) ? "pointer-events-none opacity-50" : ""}
               />
             </PaginationItem>
           </PaginationContent>
